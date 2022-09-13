@@ -1,0 +1,93 @@
+<div class="container-fluid ">
+  <div class="navbar navbar-expand-lg text-light">
+    <section class="logo">
+      <a href="#" class="navbar-brand">
+        <img src="assets/logo.jpg" alt="Tweet Logo" width="70" height="70"></a>
+    </section>
+    <h2>Tweet</h2>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <section class="collapse navbar-collapse" id="navbarcollapse">
+      <ul class="navbar-nav ml-auto">
+<li class="nav-item active mr-5">
+    <a class="nav-link" routerLink="/login">Login</a>
+  </li>
+  <li class="nav-item active mr-5">
+    <a class="nav-link" routerLink="/signup">Register</a>
+  </li>
+</ul>
+</section>
+</div>
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+				<h3>Sign In</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span (click)="navigate('fb')"><i class="fab fa-facebook-square"></i></span>
+				<span (click)="navigate('google')">	<i  class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+      </div>
+      <div class="alert alert-info text-danger small" *ngIf="errorMessage">{{errorMessage}}</div>
+      <div class="card-body">
+      <form [formGroup]="signupForm">
+        <div class="row pl-3">
+          <div class="form-group col-6">
+            <label for="user-name">Email Id</label>
+            <input type="text" formControlName='email' id="user-name" placeholder="Enter User Name" required>
+            <div class="text-danger small"
+              *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">Enter EmailId</div>
+          </div>
+          <div class="form-group col-6">
+            <label for="dob">login Id</label>
+            <input type="text" formControlName='id' id="id" placeholder="Enter login Id">
+            <div class="text-danger small"
+                *ngIf="!signupForm.get('id').valid && signupForm.get('id').touched">Enter Login Id</div>
+          </div>
+        </div>
+            <div class="row pl-3">
+              <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="first-name">First Name</label>
+                <input type="text" formControlName='firstName' id="first-name" placeholder="Enter First Name" required>
+                <div class="text-danger small"
+                  *ngIf="!signupForm.get('firstName').valid && signupForm.get('firstName').touched">Enter firstname</div>
+              </div>
+              <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="last-name">Last Name</label>
+                <input type="text" formControlName='lastName' id="last-name" placeholder="Enter Last Name">
+              </div>
+            </div>
+            
+            <div class="form-group col-12">
+              <label for="gender">Gender</label>
+              <span class="ml-4 mr-3"><input type="radio" formControlName='gender' id="male" placeholder="Enter gender" value="male" selected>Male</span>
+              <input type="radio" formControlName='gender' id="female" placeholder="Enter gender" value="female">Female
+            </div>
+        <div class="row pl-3">
+          <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="password">Password</label>
+            <input type="password" formControlName='password' id="password" placeholder="Enter Password">
+            <div class="text-danger small"
+              *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">Enter password</div>
+          </div>
+
+          <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password" [(ngModel)]='confirmPassword' [ngModelOptions]="{standalone: true}" id="confirmpassword" placeholder="Enter Confirm Password" required>
+          </div>
+          <div class="text-danger small" *ngIf="passwordCheck">
+            Password do not  match
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="submit" (click)="signupsubmit(signupForm)" class="btn float-right login_btn" [disabled]="!signupForm.valid || passwordCheck">
+        </div>
+      </form>
+    </div>
+    </div>
+    <div class="col-lg-3 col-md-1 col-sm-1">
+    </div>
+  </div>
+  <footer class="footer">Copyright @ 2021</footer>
+</div>

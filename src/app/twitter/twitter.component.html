@@ -1,0 +1,53 @@
+<app-header></app-header>
+<form class="mb-5" [formGroup]="posttweetsform">
+  <div class="form-group">
+    <label for="tweetDesc"></label>
+    <img src="assets/image.jpg" class="image ml-2 mr-2" alt="boy in a jacket" width="50" height="50">
+    <textarea id="tweetDesc" class="textBox mt-5 col-11" name="tweetDesc" formControlName='tweetDesc'
+      placeholder="Enter your Tweet" rows="4" cols="50"></textarea>
+  </div>
+  <div class="form-group post mr-5">
+    <button class="btn" type="submit" value="submit" (click)="posttweet(posttweetsform)">Post Tweet</button>
+  </div>
+</form>
+<div class="row ml-3 mt-5 mb-3">
+  <div class="col-lg-12 p-2 pb-5" *ngFor="let data of tweets;let i = index">
+    <div class="card postCard pt-3 ml-5 mt-0">
+      <div class="row">
+        <img src="assets/image.jpg" class=" ml-5 mr-2" alt="boy in a jacket" width="50" height="50">
+        <div class="ml-3 timeStamp">Posted By {{data.tweetBy}} <span class="pl-5">{{data.date}}
+          </span></div>
+      </div>
+      <div class="row"><span class="col-12 tweet"> {{data.tweetDesc}} </span></div>
+
+      <div class="row like">
+        <a href="javascript:void(0)" *ngIf="!likeArray[i]" (click)="like(i)" class="fs-blue"><i
+            class="fa fa-thumbs-up fs-blue">
+          </i>Like
+        </a>
+        <a href="javascript:void(0)" *ngIf="likeArray[i]" (click)="unlike(i)"><i class="fa fa-thumbs-up">
+          </i>Like
+        </a>
+        <a href="javascript:void(0);" (click)="reply[i]=true" class="pl-5 mb-2">Reply
+        </a>
+      </div>
+      <div class="row mb-3 ml-2" *ngIf="reply[i]">
+        <textarea class="col-8 textArea" id="replyDesc" name="replyDesc" [(ngModel)]='replyDesc'
+          placeholder="Enter your Reply" rows="2" cols="50"></textarea>
+        <span class="col-2"><button class="postCommentButton mt-2" type="submit" value="submit"
+            (click)="postcomment(data.tweetId,i)">Post Comments</button>
+        </span>
+      </div>
+      <div *ngIf="data.replyDTOList?.length > 0" class="card comment mr-3 mb-3">
+        <div *ngFor="let comment of data.replyDTOList;">
+          <div class="ml-5 timeStamp">Commented By {{comment.email}} <span class="pl-5">{{comment.date}}</span>
+          </div>
+          <div class="ml-5"> {{comment.replyDesc}} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12" style="bottom: 0;position:fixed;overflow-x:hidden">
+  <app-footer></app-footer>
+</div>

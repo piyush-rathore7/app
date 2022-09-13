@@ -1,0 +1,24 @@
+<app-header></app-header>
+<h2 class="d-flex justify-content-center mt-3 mb-3">My Tweets</h2>
+<div *ngIf="!(tweet?.length > 0)"><h4 class="d-flex justify-content-center mt-3 mb-3">No Tweets Avaiable</h4></div>
+<div class="row indx  mt-5 mb-5">
+  <div class="col-10 " *ngFor="let data of tweet">
+    <div class="card postCard pt-3 ml-5 mt-1 mb-3"><div class="row">
+      <img src="assets/image.jpg" class=" ml-5 mr-2" alt="boy in a jacket" width="50" height="50">
+      <div class="ml-3 timeStamp">Posted By {{data.tweetBy}} <span class="pl-5">{{data.date}}
+      </span></div></div>
+      <div class="row"><span class="col-12 tweet"> {{data.tweetDesc}} </span></div>
+    <button class="post mt-2 mb-2" type="submit" value="submit" (click)="delete(data.tweetId)">Delete </button>
+  <div *ngIf="data.replyDTOList?.length > 0" class="card comment mr-3 mb-3">
+    <div *ngFor="let comment of data.replyDTOList;">
+      <div class="ml-5 timeStamp">Commented By {{comment.email}} <span class="pl-5">{{comment.date}}</span>
+      </div>
+      <div class="ml-5"> {{comment.replyDesc}} </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<div class="col-12" style="bottom: 0;position: fixed; overflow:hidden">
+  <app-footer></app-footer>
+  </div>
